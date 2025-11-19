@@ -1,11 +1,10 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 
-
-session = get_active_session()
+cnx = st.connection("snowflake")
+session = cnx.session()
 all_ingredients = session.table("smoothies.public.fruit_options").select(col("fruit_name"))
 
 
